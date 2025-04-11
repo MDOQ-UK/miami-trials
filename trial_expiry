@@ -1,0 +1,34 @@
+<script>
+    setInterval(function(){
+        var trialEnd = ENDTIMESTAMP;
+        var now = Math.floor(Date.now() / 1000);
+
+        var countdown = '';
+        if(trialEnd > now){
+            let diff = trialEnd - now;
+            var seconds = parseInt(diff, 10)
+            var days = Math.floor(seconds / 86400)
+            var hours   = Math.floor((seconds - (days * 86400)) / 3600)                 
+            var minutes = Math.floor((seconds - (days * 86400) - (hours * 3600)) / 60)
+            var seconds = seconds - (days * 86400) - (hours * 3600) - (minutes * 60)  
+
+            if(days){
+                countdown += days+'d '
+            }
+            if(days | hours){
+                countdown += hours+'h '
+            }
+            if(days | hours | minutes){
+                countdown += minutes+'m '
+            }
+            if(days | hours | minutes | seconds){
+                countdown += seconds+'s '
+            }                    
+        }else{
+            countdown = 'ENDED';
+        }
+
+        document.getElementById('trial_countdown').innerHTML = countdown;
+    }, 1000);
+</script>
+<span style="display: block">Your trial expires in <span id="trial_countdown" style="font-weight: bold"></span>. <br />To keep your instance longer just <a href="PAYMENTLINK" target="_blank">add more time here.</a> Once your trial expires the instance will be automatically deleted, any data will be lost.</span>
